@@ -3,41 +3,324 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Biblioteca - Senac</title>
-    <link rel="stylesheet" href="css/style.css">
-    <!-- CDN Oficial do Supabase JS Client -->
-    <script src="https://jsdelivr.net"></script>
+    <title>Sistema de Biblioteca</title>
+    <style>
+        /* Estilos Globais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+
+        /* Sistema de Abas (Tabs) */
+        .tabs {
+            display: flex;
+            justify-content: space-around;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 25px;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #7f8c8d;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            color: #3498db;
+        }
+
+        .tab-btn.active {
+            color: #3498db;
+            border-bottom: 3px solid #3498db;
+            margin-bottom: -2px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Formulários e Alinhamento */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .btn-add {
+            background-color: #2ecc71;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-add:hover {
+            background-color: #27ae60;
+        }
+
+        /* Tabelas de Dados */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background: white;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #34495e;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        /* Badges de Status para Empréstimos */
+        .badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .badge-active {
+            background-color: #ffeaa7;
+            color: #d63031;
+        }
+
+        .badge-done {
+            background-color: #badc58;
+            color: #27ae60;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Menu Lateral ou Superior de Navegação -->
-    <nav class="sidebar">
-        <h2>📚 Biblioteca</h2>
-        <ul>
-            <li><a href="index.html" class="active">Painel Geral</a></li>
-            <li><a href="livros.html">Livros, Autores & Categorias</a></li>
-            <li><a href="alunos.html">Alunos</a></li>
-            <li><a href="emprestimos.html">Empréstimos</a></li>
-        </ul>
-    </nav>
+    <div class="container">
+        <h1>Gerenciamento de Biblioteca</h1>
 
-    <!-- Conteúdo Principal da Página -->
-    <main class="content">
-        <header>
-            <h1>Painel de Controle</h1>
-            <p>Bem-vindo ao sistema de gerenciamento da biblioteca.</p>
-        </header>
+        <!-- Navegação por Abas -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="openTab(event, 'livros')">Livros</button>
+            <button class="tab-btn" onclick="openTab(event, 'autores')">Autores</button>
+            <button class="tab-btn" onclick="openTab(event, 'categorias')">Categorias</button>
+            <button class="tab-btn" onclick="openTab(event, 'alunos')">Alunos</button>
+            <button class="tab-btn" onclick="openTab(event, 'emprestimos')">Empréstimos</button>
+        </div>
 
-        <!-- Exemplo de seção de estatísticas rápidas -->
-        <section class="dashboard-cards">
-            <div class="card"><h3>Livros Cadastrados</h3><p id="total-livros">0</p></div>
-            <div class="card"><h3>Alunos Ativos</h3><p id="total-alunos">0</p></div>
-            <div class="card"><h3>Empréstimos Pendentes</h3><p id="total-emprestimos">0</p></div>
-        </section>
-    </main>
+        <!-- Conteúdo: Livros -->
+        <div id="livros" class="tab-content active">
+            <div class="section-header">
+                <h2>Catálogo de Livros</h2>
+                <button class="btn-add">+ Novo Livro</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Título</th>
+                        <th>Autor</th>
+                        <th>Categoria</th>
+                        <th>Ano</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>LIV-001</b></td>
+                        <td>O Senhor dos Anéis</td>
+                        <td>J.R.R. Tolkien</td>
+                        <td>Fantasia</td>
+                        <td>1954</td>
+                    </tr>
+                    <tr>
+                        <td><b>LIV-002</b></td>
+                        <td>1984</td>
+                        <td>George Orwell</td>
+                        <td>Ficção Científica</td>
+                        <td>1949</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-    <!-- Scripts de Configuração e Lógica -->
-    <script src="js/supabase-config.js"></script>
-    <!-- Você pode criar um script específico para o index se necessário -->
-</body>
-</html>
+        <!-- Conteúdo: Autores -->
+        <div id="autores" class="tab-content">
+            <div class="section-header">
+                <h2>Autores Registrados</h2>
+                <button class="btn-add">+ Novo Autor</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nome do Autor</th>
+                        <th>Nacionalidade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>AUT-001</b></td>
+                        <td>J.R.R. Tolkien</td>
+                        <td>Britânico</td>
+                    </tr>
+                    <tr>
+                        <td><b>AUT-002</b></td>
+                        <td>George Orwell</td>
+                        <td>Britânico</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Conteúdo: Categorias -->
+        <div id="categorias" class="tab-content">
+            <div class="section-header">
+                <h2>Categorias de Livros</h2>
+                <button class="btn-add">+ Nova Categoria</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nome da Categoria</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>CAT-001</b></td>
+                        <td>Fantasia</td>
+                    </tr>
+                    <tr>
+                        <td><b>CAT-002</b></td>
+                        <td>Ficção Científica</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Conteúdo: Alunos -->
+        <div id="alunos" class="tab-content">
+            <div class="section-header">
+                <h2>Cadastro de Alunos</h2>
+                <button class="btn-add">+ Novo Aluno</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Matrícula</th>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Telefone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>ALU-1001</b></td>
+                        <td>Carlos Silva</td>
+                        <td>carlos.silva@email.com</td>
+                        <td>(11) 98888-8888</td>
+                    </tr>
+                    <tr>
+                        <td><b>ALU-1002</b></td>
+                        <td>Ana Souza</td>
+                        <td>ana.souza@email.com</td>
+                        <td>(11) 97777-7777</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Conteúdo: Empréstimos -->
+        <div id="emprestimos" class="tab-content">
+            <div class="section-header">
+                <h2>Controle de Empréstimos</h2>
+                <button class="btn-add">+ Novo Empréstimo</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cód. Empréstimo</th>
+                        <th>Livro</th>
+                        <th>Aluno</th>
+                        <th>Data Empréstimo</th>
+                        <th>Data Devolução</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>EMP-5001</b></td>
+                        <td>O Senhor dos Anéis</td>
+                        <td>Carlos Silva</td>
+                        <td>20/09/2026</td>
+                        <td>27/09/2026</td>
+                        <td><span class="badge badge-done">Devolvido</span></td>
+                    </tr>
+                    <tr>
+                        <td><b>EMP-5002</b></td>
+                        <td>1984</td>
+                        <td>Ana Souza</td>
+                        <td>28/09/2026</td>
+                        <td>05/10/2026</td>
+                        <td><span class="badge badge-active">Pendente</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Script Simples para Alternar as Abas -->
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
