@@ -3,10 +3,10 @@
 // ==========================================
 
 // COLOQUE A URL DO SEU PROJETO AQUI
-const SUPABASE_URL = "https://SEU-PROJETO.supabase.co";
+const SUPABASE_URL = "https://zaoyjylnfdfgnjdsyfvn.supabase.co";
 
 // COLOQUE A SUA PUBLISHABLE KEY / ANON KEY AQUI
-const SUPABASE_KEY = "SUA_CHAVE_PUBLICAVEL";
+const SUPABASE_KEY = "sb_publishable_pR_SHCLILY7JW2o8XRc0Sw_ofhmj0pa";
 
 const db = supabase.createClient(
     SUPABASE_URL,
