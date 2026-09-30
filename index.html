@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Biblioteca - Senac</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- CDN Oficial do Supabase JS Client -->
+    <script src="https://jsdelivr.net"></script>
+</head>
+<body>
+
+    <!-- Menu Lateral ou Superior de Navegação -->
+    <nav class="sidebar">
+        <h2>📚 Biblioteca</h2>
+        <ul>
+            <li><a href="index.html" class="active">Painel Geral</a></li>
+            <li><a href="livros.html">Livros, Autores & Categorias</a></li>
+            <li><a href="alunos.html">Alunos</a></li>
+            <li><a href="emprestimos.html">Empréstimos</a></li>
+        </ul>
+    </nav>
+
+    <!-- Conteúdo Principal da Página -->
+    <main class="content">
+        <header>
+            <h1>Painel de Controle</h1>
+            <p>Bem-vindo ao sistema de gerenciamento da biblioteca.</p>
+        </header>
+
+        <!-- Exemplo de seção de estatísticas rápidas -->
+        <section class="dashboard-cards">
+            <div class="card"><h3>Livros Cadastrados</h3><p id="total-livros">0</p></div>
+            <div class="card"><h3>Alunos Ativos</h3><p id="total-alunos">0</p></div>
+            <div class="card"><h3>Empréstimos Pendentes</h3><p id="total-emprestimos">0</p></div>
+        </section>
+    </main>
+
+    <!-- Scripts de Configuração e Lógica -->
+    <script src="js/supabase-config.js"></script>
+    <!-- Você pode criar um script específico para o index se necessário -->
+</body>
+</html>
