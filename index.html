@@ -4,323 +4,277 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Biblioteca</title>
-    <style>
-        /* Estilos Globais */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #f4f6f9;
-            color: #333;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #2c3e50;
-        }
-
-        /* Sistema de Abas (Tabs) */
-        .tabs {
-            display: flex;
-            justify-content: space-around;
-            border-bottom: 2px solid #ddd;
-            margin-bottom: 25px;
-        }
-
-        .tab-btn {
-            padding: 12px 24px;
-            cursor: pointer;
-            border: none;
-            background: none;
-            font-size: 16px;
-            font-weight: 600;
-            color: #7f8c8d;
-            transition: all 0.3s ease;
-        }
-
-        .tab-btn:hover {
-            color: #3498db;
-        }
-
-        .tab-btn.active {
-            color: #3498db;
-            border-bottom: 3px solid #3498db;
-            margin-bottom: -2px;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Formulários e Alinhamento */
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .btn-add {
-            background-color: #2ecc71;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .btn-add:hover {
-            background-color: #27ae60;
-        }
-
-        /* Tabelas de Dados */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            background: white;
-        }
-
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #34495e;
-            color: white;
-            font-weight: 600;
-        }
-
-        tr:hover {
-            background-color: #f9f9f9;
-        }
-
-        /* Badges de Status para Empréstimos */
-        .badge {
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            display: inline-block;
-        }
-
-        .badge-active {
-            background-color: #ffeaa7;
-            color: #d63031;
-        }
-
-        .badge-done {
-            background-color: #badc58;
-            color: #27ae60;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <div class="container">
-        <h1>Gerenciamento de Biblioteca</h1>
+    <header>
+        <h1>📚 Sistema de Biblioteca</h1>
+        <p>Gerenciamento de livros e empréstimos</p>
+    </header>
 
-        <!-- Navegação por Abas -->
-        <div class="tabs">
-            <button class="tab-btn active" onclick="openTab(event, 'livros')">Livros</button>
-            <button class="tab-btn" onclick="openTab(event, 'autores')">Autores</button>
-            <button class="tab-btn" onclick="openTab(event, 'categorias')">Categorias</button>
-            <button class="tab-btn" onclick="openTab(event, 'alunos')">Alunos</button>
-            <button class="tab-btn" onclick="openTab(event, 'emprestimos')">Empréstimos</button>
-        </div>
+    <nav>
+        <a href="#livros">Livros</a>
+        <a href="#autores">Autores</a>
+        <a href="#categorias">Categorias</a>
+        <a href="#alunos">Alunos</a>
+        <a href="#emprestimos">Empréstimos</a>
+    </nav>
 
-        <!-- Conteúdo: Livros -->
-        <div id="livros" class="tab-content active">
-            <div class="section-header">
-                <h2>Catálogo de Livros</h2>
-                <button class="btn-add">+ Novo Livro</button>
+    <main>
+
+        <!-- LIVROS -->
+        <section id="livros">
+            <h2>📖 Livros</h2>
+
+            <div class="formulario">
+                <input type="text" placeholder="Nome do livro">
+                <input type="text" placeholder="Autor">
+                <input type="text" placeholder="Categoria">
+                <input type="number" placeholder="Ano">
+                <button>Adicionar Livro</button>
             </div>
+
             <table>
                 <thead>
                     <tr>
-                        <th>Código</th>
-                        <th>Título</th>
+                        <th>ID</th>
+                        <th>Livro</th>
                         <th>Autor</th>
                         <th>Categoria</th>
                         <th>Ano</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     <tr>
-                        <td><b>LIV-001</b></td>
-                        <td>O Senhor dos Anéis</td>
-                        <td>J.R.R. Tolkien</td>
-                        <td>Fantasia</td>
-                        <td>1954</td>
+                        <td>1</td>
+                        <td>Dom Casmurro</td>
+                        <td>Machado de Assis</td>
+                        <td>Romance</td>
+                        <td>1899</td>
+                        <td>
+                            <button class="editar">Editar</button>
+                            <button class="excluir">Excluir</button>
+                        </td>
                     </tr>
+
                     <tr>
-                        <td><b>LIV-002</b></td>
-                        <td>1984</td>
-                        <td>George Orwell</td>
-                        <td>Ficção Científica</td>
-                        <td>1949</td>
+                        <td>2</td>
+                        <td>O Pequeno Príncipe</td>
+                        <td>Antoine de Saint-Exupéry</td>
+                        <td>Literatura</td>
+                        <td>1943</td>
+                        <td>
+                            <button class="editar">Editar</button>
+                            <button class="excluir">Excluir</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
-        </div>
+        </section>
 
-        <!-- Conteúdo: Autores -->
-        <div id="autores" class="tab-content">
-            <div class="section-header">
-                <h2>Autores Registrados</h2>
-                <button class="btn-add">+ Novo Autor</button>
+
+        <!-- AUTORES -->
+        <section id="autores">
+            <h2>✍️ Autores</h2>
+
+            <div class="formulario">
+                <input type="text" placeholder="Nome do autor">
+                <input type="text" placeholder="Nacionalidade">
+                <button>Adicionar Autor</button>
             </div>
+
             <table>
                 <thead>
                     <tr>
-                        <th>Código</th>
-                        <th>Nome do Autor</th>
-                        <th>Nacionalidade</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><b>AUT-001</b></td>
-                        <td>J.R.R. Tolkien</td>
-                        <td>Britânico</td>
-                    </tr>
-                    <tr>
-                        <td><b>AUT-002</b></td>
-                        <td>George Orwell</td>
-                        <td>Britânico</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Conteúdo: Categorias -->
-        <div id="categorias" class="tab-content">
-            <div class="section-header">
-                <h2>Categorias de Livros</h2>
-                <button class="btn-add">+ Nova Categoria</button>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Nome da Categoria</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><b>CAT-001</b></td>
-                        <td>Fantasia</td>
-                    </tr>
-                    <tr>
-                        <td><b>CAT-002</b></td>
-                        <td>Ficção Científica</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Conteúdo: Alunos -->
-        <div id="alunos" class="tab-content">
-            <div class="section-header">
-                <h2>Cadastro de Alunos</h2>
-                <button class="btn-add">+ Novo Aluno</button>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Matrícula</th>
+                        <th>ID</th>
                         <th>Nome</th>
-                        <th>E-mail</th>
-                        <th>Telefone</th>
+                        <th>Nacionalidade</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     <tr>
-                        <td><b>ALU-1001</b></td>
-                        <td>Carlos Silva</td>
-                        <td>carlos.silva@email.com</td>
-                        <td>(11) 98888-8888</td>
+                        <td>1</td>
+                        <td>Machado de Assis</td>
+                        <td>Brasileiro</td>
+                        <td>
+                            <button class="editar">Editar</button>
+                            <button class="excluir">Excluir</button>
+                        </td>
                     </tr>
+
                     <tr>
-                        <td><b>ALU-1002</b></td>
-                        <td>Ana Souza</td>
-                        <td>ana.souza@email.com</td>
-                        <td>(11) 97777-7777</td>
+                        <td>2</td>
+                        <td>J. K. Rowling</td>
+                        <td>Britânica</td>
+                        <td>
+                            <button class="editar">Editar</button>
+                            <button class="excluir">Excluir</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
-        </div>
+        </section>
 
-        <!-- Conteúdo: Empréstimos -->
-        <div id="emprestimos" class="tab-content">
-            <div class="section-header">
-                <h2>Controle de Empréstimos</h2>
-                <button class="btn-add">+ Novo Empréstimo</button>
+
+        <!-- CATEGORIAS -->
+        <section id="categorias">
+            <h2>🏷️ Categorias</h2>
+
+            <div class="formulario">
+                <input type="text" placeholder="Nome da categoria">
+                <input type="text" placeholder="Descrição">
+                <button>Adicionar Categoria</button>
             </div>
+
             <table>
                 <thead>
                     <tr>
-                        <th>Cód. Empréstimo</th>
-                        <th>Livro</th>
+                        <th>ID</th>
+                        <th>Categoria</th>
+                        <th>Descrição</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Romance</td>
+                        <td>Livros de romance</td>
+                        <td>
+                            <button class="editar">Editar</button>
+                            <button class="excluir">Excluir</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>2</td>
+                        <td>Aventura</td>
+                        <td>Livros de aventura</td>
+                        <td>
+                            <button class="editar">Editar</button>
+                            <button class="excluir">Excluir</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+        <!-- ALUNOS -->
+        <section id="alunos">
+            <h2>👨‍🎓 Alunos</h2>
+
+            <div class="formulario">
+                <input type="text" placeholder="Nome do aluno">
+                <input type="text" placeholder="Matrícula">
+                <input type="email" placeholder="E-mail">
+                <button>Adicionar Aluno</button>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Matrícula</th>
+                        <th>E-mail</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>João Silva</td>
+                        <td>2026001</td>
+                        <td>joao@email.com</td>
+                        <td>
+                            <button class="editar">Editar</button>
+                            <button class="excluir">Excluir</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>2</td>
+                        <td>Maria Souza</td>
+                        <td>2026002</td>
+                        <td>maria@email.com</td>
+                        <td>
+                            <button class="editar">Editar</button>
+                            <button class="excluir">Excluir</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+        <!-- EMPRÉSTIMOS -->
+        <section id="emprestimos">
+            <h2>📋 Empréstimos</h2>
+
+            <div class="formulario">
+                <input type="text" placeholder="Nome do aluno">
+                <input type="text" placeholder="Livro">
+                <label>
+                    Data do empréstimo
+                    <input type="date">
+                </label>
+
+                <label>
+                    Data de devolução
+                    <input type="date">
+                </label>
+
+                <button>Registrar Empréstimo</button>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
                         <th>Aluno</th>
-                        <th>Data Empréstimo</th>
-                        <th>Data Devolução</th>
+                        <th>Livro</th>
+                        <th>Empréstimo</th>
+                        <th>Devolução</th>
                         <th>Status</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     <tr>
-                        <td><b>EMP-5001</b></td>
-                        <td>O Senhor dos Anéis</td>
-                        <td>Carlos Silva</td>
-                        <td>20/09/2026</td>
-                        <td>27/09/2026</td>
-                        <td><span class="badge badge-done">Devolvido</span></td>
+                        <td>1</td>
+                        <td>João Silva</td>
+                        <td>Dom Casmurro</td>
+                        <td>30/09/2026</td>
+                        <td>07/10/2026</td>
+                        <td><span class="status ativo">Ativo</span></td>
                     </tr>
+
                     <tr>
-                        <td><b>EMP-5002</b></td>
-                        <td>1984</td>
-                        <td>Ana Souza</td>
-                        <td>28/09/2026</td>
-                        <td>05/10/2026</td>
-                        <td><span class="badge badge-active">Pendente</span></td>
+                        <td>2</td>
+                        <td>Maria Souza</td>
+                        <td>O Pequeno Príncipe</td>
+                        <td>25/09/2026</td>
+                        <td>02/10/2026</td>
+                        <td><span class="status atrasado">Atrasado</span></td>
                     </tr>
                 </tbody>
             </table>
-        </div>
-    </div>
+        </section>
 
-    <!-- Script Simples para Alternar as Abas -->
-    <script>
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tab-btn");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
+    </main>
+
+    <footer>
+        <p>© 2026 - Sistema de Biblioteca</p>
+    </footer>
+
+</body>
+</html>
