@@ -1,5 +1,5 @@
 // Substitua pelas credenciais reais do seu projeto no painel do Supabase
-const SUPABASE_URL = "https://supabase.co";
+const SUPABASE_URL = "https://zaoyjylnfdfgnjdsyfvn.supabase.co";
 const SUPABASE_ANON_KEY = "sua-chave-anon-publica-aqui";
 
 // Inicializa o cliente global do Supabase
