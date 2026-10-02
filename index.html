@@ -6,278 +6,114 @@
     <title>Sistema de Biblioteca</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <header>
-        <h1>📚 Sistema de Biblioteca</h1>
-        <p>Gerenciamento de livros e empréstimos</p>
-    </header>
+<header>
+    <h1>📚 Sistema de Biblioteca</h1>
+    <p>Gerenciamento de livros e empréstimos</p>
+</header>
 
-    <nav>
-        <a href="#livros">Livros</a>
-        <a href="#autores">Autores</a>
-        <a href="#categorias">Categorias</a>
-        <a href="#alunos">Alunos</a>
-        <a href="#emprestimos">Empréstimos</a>
-    </nav>
+<nav>
+    <a href="#livros">Livros</a>
+    <a href="#autores">Autores</a>
+    <a href="#categorias">Categorias</a>
+    <a href="#alunos">Alunos</a>
+    <a href="#emprestimos">Empréstimos</a>
+</nav>
 
-    <main>
+<main>
+    <section id="livros">
+        <h2>📖 Livros</h2>
+        <form class="formulario" id="form-livro">
+            <input id="livro-titulo" type="text" placeholder="Nome do livro" required>
+            <select id="livro-autor" required>
+                <option value="">Selecione o autor</option>
+            </select>
+            <select id="livro-categoria">
+                <option value="">Selecione a categoria</option>
+            </select>
+            <input id="livro-ano" type="number" placeholder="Ano" min="0">
+            <button type="submit">Adicionar Livro</button>
+        </form>
 
-        <!-- LIVROS -->
-        <section id="livros">
-            <h2>📖 Livros</h2>
+        <table>
+            <thead>
+                <tr><th>ID</th><th>Livro</th><th>Autor</th><th>Categoria</th><th>Ano</th><th>Status</th><th>Ações</th></tr>
+            </thead>
+            <tbody id="tabela-livros"></tbody>
+        </table>
+    </section>
 
-            <div class="formulario">
-                <input type="text" placeholder="Nome do livro">
-                <input type="text" placeholder="Autor">
-                <input type="text" placeholder="Categoria">
-                <input type="number" placeholder="Ano">
-                <button>Adicionar Livro</button>
-            </div>
+    <section id="autores">
+        <h2>✍️ Autores</h2>
+        <form class="formulario" id="form-autor">
+            <input id="autor-nome" type="text" placeholder="Nome do autor" required>
+            <input id="autor-nacionalidade" type="text" placeholder="Nacionalidade">
+            <button type="submit">Adicionar Autor</button>
+        </form>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Livro</th>
-                        <th>Autor</th>
-                        <th>Categoria</th>
-                        <th>Ano</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
+        <table>
+            <thead><tr><th>ID</th><th>Nome</th><th>Nacionalidade</th><th>Ações</th></tr></thead>
+            <tbody id="tabela-autores"></tbody>
+        </table>
+    </section>
 
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Dom Casmurro</td>
-                        <td>Machado de Assis</td>
-                        <td>Romance</td>
-                        <td>1899</td>
-                        <td>
-                            <button class="editar">Editar</button>
-                            <button class="excluir">Excluir</button>
-                        </td>
-                    </tr>
+    <section id="categorias">
+        <h2>🏷️ Categorias</h2>
+        <form class="formulario" id="form-categoria">
+            <input id="categoria-nome" type="text" placeholder="Nome da categoria" required>
+            <input id="categoria-descricao" type="text" placeholder="Descrição">
+            <button type="submit">Adicionar Categoria</button>
+        </form>
 
-                    <tr>
-                        <td>2</td>
-                        <td>O Pequeno Príncipe</td>
-                        <td>Antoine de Saint-Exupéry</td>
-                        <td>Literatura</td>
-                        <td>1943</td>
-                        <td>
-                            <button class="editar">Editar</button>
-                            <button class="excluir">Excluir</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+        <table>
+            <thead><tr><th>ID</th><th>Categoria</th><th>Descrição</th><th>Ações</th></tr></thead>
+            <tbody id="tabela-categorias"></tbody>
+        </table>
+    </section>
 
+    <section id="alunos">
+        <h2>👨‍🎓 Alunos</h2>
+        <form class="formulario" id="form-aluno">
+            <input id="aluno-nome" type="text" placeholder="Nome do aluno" required>
+            <input id="aluno-matricula" type="text" placeholder="Matrícula" required>
+            <input id="aluno-email" type="email" placeholder="E-mail">
+            <button type="submit">Adicionar Aluno</button>
+        </form>
 
-        <!-- AUTORES -->
-        <section id="autores">
-            <h2>✍️ Autores</h2>
+        <table>
+            <thead><tr><th>ID</th><th>Nome</th><th>Matrícula</th><th>E-mail</th><th>Ações</th></tr></thead>
+            <tbody id="tabela-alunos"></tbody>
+        </table>
+    </section>
 
-            <div class="formulario">
-                <input type="text" placeholder="Nome do autor">
-                <input type="text" placeholder="Nacionalidade">
-                <button>Adicionar Autor</button>
-            </div>
+    <section id="emprestimos">
+        <h2>📋 Empréstimos</h2>
+        <form class="formulario" id="form-emprestimo">
+            <select id="emprestimo-aluno" required>
+                <option value="">Selecione o aluno</option>
+            </select>
+            <select id="emprestimo-livro" required>
+                <option value="">Selecione o livro disponível</option>
+            </select>
+            <label>Data do empréstimo<input id="emprestimo-data" type="date" required></label>
+            <label>Data de devolução<input id="emprestimo-devolucao" type="date" required></label>
+            <button type="submit">Registrar Empréstimo</button>
+        </form>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Nacionalidade</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
+        <table>
+            <thead>
+                <tr><th>ID</th><th>Aluno</th><th>Livro</th><th>Empréstimo</th><th>Devolução</th><th>Status</th><th>Ações</th></tr>
+            </thead>
+            <tbody id="tabela-emprestimos"></tbody>
+        </table>
+    </section>
+</main>
 
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Machado de Assis</td>
-                        <td>Brasileiro</td>
-                        <td>
-                            <button class="editar">Editar</button>
-                            <button class="excluir">Excluir</button>
-                        </td>
-                    </tr>
+<footer><p>© 2026 - Sistema de Biblioteca</p></footer>
 
-                    <tr>
-                        <td>2</td>
-                        <td>J. K. Rowling</td>
-                        <td>Britânica</td>
-                        <td>
-                            <button class="editar">Editar</button>
-                            <button class="excluir">Excluir</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-
-        <!-- CATEGORIAS -->
-        <section id="categorias">
-            <h2>🏷️ Categorias</h2>
-
-            <div class="formulario">
-                <input type="text" placeholder="Nome da categoria">
-                <input type="text" placeholder="Descrição">
-                <button>Adicionar Categoria</button>
-            </div>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Categoria</th>
-                        <th>Descrição</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Romance</td>
-                        <td>Livros de romance</td>
-                        <td>
-                            <button class="editar">Editar</button>
-                            <button class="excluir">Excluir</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>2</td>
-                        <td>Aventura</td>
-                        <td>Livros de aventura</td>
-                        <td>
-                            <button class="editar">Editar</button>
-                            <button class="excluir">Excluir</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-
-        <!-- ALUNOS -->
-        <section id="alunos">
-            <h2>👨‍🎓 Alunos</h2>
-
-            <div class="formulario">
-                <input type="text" placeholder="Nome do aluno">
-                <input type="text" placeholder="Matrícula">
-                <input type="email" placeholder="E-mail">
-                <button>Adicionar Aluno</button>
-            </div>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Matrícula</th>
-                        <th>E-mail</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>João Silva</td>
-                        <td>2026001</td>
-                        <td>joao@email.com</td>
-                        <td>
-                            <button class="editar">Editar</button>
-                            <button class="excluir">Excluir</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>2</td>
-                        <td>Maria Souza</td>
-                        <td>2026002</td>
-                        <td>maria@email.com</td>
-                        <td>
-                            <button class="editar">Editar</button>
-                            <button class="excluir">Excluir</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-
-        <!-- EMPRÉSTIMOS -->
-        <section id="emprestimos">
-            <h2>📋 Empréstimos</h2>
-
-            <div class="formulario">
-                <input type="text" placeholder="Nome do aluno">
-                <input type="text" placeholder="Livro">
-                <label>
-                    Data do empréstimo
-                    <input type="date">
-                </label>
-
-                <label>
-                    Data de devolução
-                    <input type="date">
-                </label>
-
-                <button>Registrar Empréstimo</button>
-            </div>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Aluno</th>
-                        <th>Livro</th>
-                        <th>Empréstimo</th>
-                        <th>Devolução</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>João Silva</td>
-                        <td>Dom Casmurro</td>
-                        <td>30/09/2026</td>
-                        <td>07/10/2026</td>
-                        <td><span class="status ativo">Ativo</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>2</td>
-                        <td>Maria Souza</td>
-                        <td>O Pequeno Príncipe</td>
-                        <td>25/09/2026</td>
-                        <td>02/10/2026</td>
-                        <td><span class="status atrasado">Atrasado</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-    </main>
-
-    <footer>
-        <p>© 2026 - Sistema de Biblioteca</p>
-    </footer>
+<!-- Biblioteca oficial do Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/supabase-config.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
-
